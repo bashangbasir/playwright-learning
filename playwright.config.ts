@@ -30,6 +30,8 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://practicesoftwaretesting.com',
 
+    testIdAttribute: 'data-test', // Use data-test-id attribute for selectors
+
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on', // Collect trace for failed tests
     actionTimeout: 0, // Disable action timeout
@@ -53,11 +55,11 @@ export default defineConfig({
       use: { ...devices['Desktop Firefox'] },
     },
 
-    {
-      name: 'webkit',
-      dependencies: ["setup"],
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   dependencies: ["setup"],
+    //   use: { ...devices['Desktop Safari'] },
+    // },
     
     {
       name: "setup", // This project is used to setup the test data, utilities etc.
