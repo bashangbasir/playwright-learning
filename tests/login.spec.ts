@@ -8,4 +8,4 @@ test('test', async ({ page }) => {
   await page.locator('[data-test="login-submit"]').click();
   await expect(page.locator('[data-test="nav-menu"]')).toContainText('Jane Doe');
   await expect(page.locator('[data-test="page-title"]')).toContainText('My account');
-});
+}); 
