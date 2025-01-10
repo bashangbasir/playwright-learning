@@ -35,3 +35,19 @@ test.describe( "Home page", () => {
     });
     
 });
+
+test.describe("Home page customer 01", ()=> {
+
+    test.use({storageState: ".auth/customer01.json"});
+    test.beforeEach(async ({ page }) => {
+        await page.goto("https://practicesoftwaretesting.com/");
+    });
+
+    test("Check if the customer signed in", async({ page }) => {
+        await expect(page.getByTestId('nav-sign-in')).not.toBeVisible();
+    });
+
+    // test("", async({ page }) => {
+
+    // });
+});
