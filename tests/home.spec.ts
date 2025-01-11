@@ -33,10 +33,9 @@ test.describe( "Home page", () => {
         await expect(productGrid.getByRole("link")).toHaveCount(1);
         expect(await page.getByAltText("Thor Hammer")).toBeVisible();   
     });
-    
 });
 
-test.describe("Home page customer 01", ()=> {
+test.describe("Home page customer 01 - storageState setup", ()=> {
 
     test.use({storageState: ".auth/customer01.json"});
     test.beforeEach(async ({ page }) => {
@@ -46,8 +45,27 @@ test.describe("Home page customer 01", ()=> {
     test("Check if the customer signed in", async({ page }) => {
         await expect(page.getByTestId('nav-sign-in')).not.toBeVisible();
     });
+});
 
-    // test("", async({ page }) => {
+test.describe("UI Visual test 01", () => {
 
-    // });
+    test("Homepage - visual testing without auth", async ({ page }) => {
+        await page.waitForLoadState("networkidle");
+        await page.goto("https://practicesoftwaretesting.com/");
+        await expect(page).toHaveScreenshot("home-no-auth.png", {
+            mask: [page.getByTitle("Practice Software Testing - Toolshop")],
+        });
+    });
+});
+
+test.describe("UI Visual test 02", () => {
+
+    test.use({storageState: ".auth/customer01.json"});
+    test("Homepage - visual testing with auth ", async ({ page }) => {
+        await page.waitForLoadState("networkidle");
+        await page.goto("https://practicesoftwaretesting.com/");
+        await expect(page).toHaveScreenshot("home-auth.png", {
+            mask: [page.getByTitle("Practice Software Testing - Toolshop")],
+        });
+    });
 });
