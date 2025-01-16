@@ -4,7 +4,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /.auth
-tests/home.spec.ts-snapshots/
 
 tests/example.spec.ts
 tests-examples/demo-todo-app.spec.ts
