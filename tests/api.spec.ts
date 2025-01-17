@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { request } from "http";
 
 test("POST user/login", async ({ request })=> {
 
@@ -29,5 +30,24 @@ test("GET /products", async ({ request })=> {
     const responseBody = await response.json()
     expect(responseBody.data.length).toBe(9);
     expect(responseBody.total).toBe(50);
+
+});
+
+test("GET product/{id}", async({ request }) => {
+    const apiUrl = "https://api.practicesoftwaretesting.com";
+    const getProdutsResponse = await request.get( apiUrl + "/products");
+    expect(getProdutsResponse.status()).toBe(200);
+
+    const responseBody = await getProdutsResponse.json()
+    const productId = responseBody.data[0].id
+
+    const getProductById = await request.get( apiUrl + "/products/" + productId);
+    expect(getProductById.status()).toBe(200);
+    
+    const getProductByIdResponse = await getProductById.json();
+
+    expect(getProductByIdResponse.price).toBeTruthy();
+    expect(getProductByIdResponse.id).toBe(productId);
+    expect(getProductByIdResponse.name).toBeTruthy();
 
 });
